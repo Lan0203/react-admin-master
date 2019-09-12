@@ -9,6 +9,7 @@ import Modals from './pages/ui/modals';
 import Loadings from './pages/ui/loadings';
 import Notification from './pages/ui/notice';
 import Messages from './pages/ui/message';
+import Tabs from './pages/ui/tabs';
 export default class IRouter extends Component{
 
     render(){
@@ -24,6 +25,7 @@ export default class IRouter extends Component{
                                 <Route path='/ui/loading' component={Loadings} />
                                 <Route path='/ui/notification' component={Notification} />
                                 <Route path='/ui/messages' component={Messages} />
+                                <Route path='/ui/tabs' component={Tabs} />
                                 <Route component={NoMatch} />  
                             </Switch>
                         </Admin>
