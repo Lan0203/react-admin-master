@@ -19,6 +19,26 @@ const menuList = [
                 title:"Loading",
                 key:"/admin/ui/loading",
             },
+            {
+                title:"Notice",
+                key:"/admin/ui/notice",
+            },
+            {
+                title:"Message",
+                key:"/admin/ui/message",
+            },
+            {
+                title:"Tab",
+                key:"/admin/ui/tab",
+            },
+            {
+                title:"Gallery",
+                key:"/admin/ui/gallery",
+            },
+            {
+                title:"Carousel",
+                key:"/admin/ui/carousel",
+            },
         ]
     },
     {
