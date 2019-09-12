@@ -7,6 +7,8 @@ import Buttons from './pages/ui/buttons.js';
 import NoMatch from './pages/nomatch';
 import Modals from './pages/ui/modals';
 import Loadings from './pages/ui/loadings';
+import Notification from './pages/ui/notice';
+import Messages from './pages/ui/message';
 export default class IRouter extends Component{
 
     render(){
@@ -20,6 +22,8 @@ export default class IRouter extends Component{
                                 <Route path='/ui/buttons' component={Buttons} />
                                 <Route path='/ui/modals' component={Modals} />
                                 <Route path='/ui/loading' component={Loadings} />
+                                <Route path='/ui/notification' component={Notification} />
+                                <Route path='/ui/messages' component={Messages} />
                                 <Route component={NoMatch} />  
                             </Switch>
                         </Admin>
