@@ -5,6 +5,8 @@ import Admin from './admin';
 import Login from './pages/login/index'
 import Buttons from './pages/ui/buttons.js';
 import NoMatch from './pages/nomatch';
+import Modals from './pages/ui/modals';
+import Loadings from './pages/ui/loadings';
 export default class IRouter extends Component{
 
     render(){
@@ -12,10 +14,12 @@ export default class IRouter extends Component{
             <Router>
                 <App>
                     <Route path='/login' component={Login} />
-                    <Route path='/admin' render={()=>
+                    <Route path='/' render={()=>
                         <Admin>
                             <Switch>
-                                <Route path='/admin/ui/buttons' component={Buttons} />
+                                <Route path='/ui/buttons' component={Buttons} />
+                                <Route path='/ui/modals' component={Modals} />
+                                <Route path='/ui/loading' component={Loadings} />
                                 <Route component={NoMatch} />  
                             </Switch>
                         </Admin>

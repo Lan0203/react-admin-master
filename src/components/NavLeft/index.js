@@ -19,7 +19,7 @@ export default class NavLeft extends Component{
         return data.map((item)=>{
             if(item.children){
                 return (
-                    <SubMenu title={item.title} key={item.key}>
+                    <SubMenu title={<span><Icon type={item.icon} />{item.title}</span>} key={item.key}>
                         {this.renderMenu(item.children)}
                     </SubMenu>
                 )
