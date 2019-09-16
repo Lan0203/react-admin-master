@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button, Tabs, message, Icon } from 'antd'
+import { Card, Tabs, message, Icon } from 'antd'
 import './ui.less'
 const TabPane = Tabs.TabPane;
 export default class Buttons extends React.Component {
@@ -82,11 +82,8 @@ export default class Buttons extends React.Component {
                     </Tabs>
                 </Card>
                 <Card title="Tab带图的页签" className="card-wrap">
-                    <Tabs 
-                        onChange={this.onChange}
-                        activeKey={this.state.activeKey}
-                        type="editable-card"
-                        onEdit={this.onEdit}
+                    <Tabs onChange={this.onChange} activeKey={this.state.activeKey}
+                        type="editable-card" onEdit={this.onEdit}
                     >
                         {
                             this.state.panes.map((panel)=>{
