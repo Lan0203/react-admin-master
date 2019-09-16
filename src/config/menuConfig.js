@@ -54,7 +54,7 @@ const menuList = [
             },
             {
                 title: '注册',
-                key: '/form/reg',
+                key: '/form/register',
             }
         ]
     },
