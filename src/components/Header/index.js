@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { Row, Col } from 'antd';
 import './index.less';
-import Util from '../../untils/untils';
+import Utils from '../../utils/utils';
 import axios from '../../axios'
 export default class Header extends Component{
     constructor(){
@@ -18,7 +18,7 @@ export default class Header extends Component{
             userName:"兰木落",
         });
         setInterval(()=>{
-            let sysTime= Util.formateDate(new Date().getTime());
+            let sysTime= Utils.formateDate(new Date().getTime());
             this.setState({
                 sysTime:sysTime
             });

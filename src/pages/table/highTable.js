@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Table, Modal, Button, message, Badge } from 'antd';
 import axios from '../../axios/index'
-import Utils from '../../untils/untils';
+import Utils from '../../utils/utils';
 export default class HighTable extends React.Component {
 
     state = {
@@ -23,15 +23,16 @@ export default class HighTable extends React.Component {
                 params: {
                     page: this.params.page
                 },
-                isShowLoading:false
+                //isShowLoading:false
             }
         }).then((res) => {
-            if (res.code == 0) {
-                res.result.list.map((item, index) => {
+            if (res.code === 0) {
+                let list=res.result.list.map((item, index) => {
                     item.key = index;
+                    return item
                 })
                 this.setState({
-                    dataSource: res.result.list
+                    dataSource: list
                 })
             }
         })
@@ -77,7 +78,7 @@ export default class HighTable extends React.Component {
                 width: 80,
                 dataIndex: 'sex',
                 render(sex) {
-                    return sex == 1 ? '男' : '女'
+                    return sex === 1 ? '男' : '女'
                 }
             },
             {
@@ -155,7 +156,7 @@ export default class HighTable extends React.Component {
                 width: 80,
                 dataIndex: 'sex',
                 render(sex) {
-                    return sex == 1 ? '男' : '女'
+                    return sex === 1 ? '男' : '女'
                 }
             },
             {
@@ -311,7 +312,7 @@ export default class HighTable extends React.Component {
                 key: 'sex',
                 dataIndex: 'sex',
                 render(sex) {
-                    return sex == 1 ? '男' : '女'
+                    return sex === 1 ? '男' : '女'
                 }
             },
             {
@@ -385,7 +386,7 @@ export default class HighTable extends React.Component {
                 title: '性别',
                 dataIndex: 'sex',
                 render(sex) {
-                    return sex == 1 ? '男' : '女'
+                    return sex === 1 ? '男' : '女'
                 }
             },
             {

@@ -23,7 +23,8 @@ export default class Axios {
             loading.style.display = 'block';
         }
         //let baseApi = 'https://www.easy-mock.com/mock/5b012c1fe6e1035843cd3aff/mockapi'
-        let baseApi = 'https://www.easy-mock.com/mock/5d8032a226434a41a66000ab/api';
+        //let baseApi = 'https://www.easy-mock.com/mock/5d8032a226434a41a66000ab/api';
+        let baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api';
         return new Promise((resolve,reject)=>{
             axios({
                 url:options.url,
@@ -38,8 +39,7 @@ export default class Axios {
                 }
                 if (response.status === 200){
                     let res = response.data;
-                    if (res.code === 0){
-                        console.log("res")
+                    if (res.code.toString() === "0"){
                         resolve(res);
                     }else{
                         Modal.info({

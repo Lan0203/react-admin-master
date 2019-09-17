@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { Card, Table, Modal, Button, message} from 'antd';
 import axios from '../../axios/index';
-import Untils from '../../untils/untils'
+import Untils from '../../utils/utils'
 export default class BasicTable extends Component{
 
     constructor(){
@@ -12,16 +12,16 @@ export default class BasicTable extends Component{
                 // {id:'0',userName:'Jack',sex:'1',state:'5',interest:'3',birthday:'2000-01-01',address:'北京市海淀区奥林匹克公园',time:'09:00'},
                 // {id:'1',userName:'Tom',sex:'2',state:'4',interest:'5',birthday:'2000-01-01',address:'北京市海淀区奥林匹克公园',time:'09:00'},
                 // {id:'2', userName:'Lily',sex:'1',state:'2',interest:'1',birthday:'2000-01-01',address:'北京市海淀区奥林匹克公园',time:'09:00'},
-                {"id": 1,"userName": "侯静","sex": 2,"state": 3,"interest": 6,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
-                {"id": 2,"userName": "胡秀兰", "sex": 2,"state": 5, "interest": 8,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
-                {"id": 3,"userName": "田静","sex": 2,"state": 5,"interest": 4,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
-                {"id": 4,"userName": "唐娟","sex": 1,"state": 2,"interest": 5,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
-                {"id": 5,"userName": "梁芳","sex": 2,"state": 2,"interest": 4,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
-                {"id": 6,"userName": "方磊","sex": 1, "state": 5,"interest": 4,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
-                {"id": 7,"userName": "卢娜","sex": 1,"state": 1,"interest": 2,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
-                {"id": 8,"userName": "于超","sex": 1,"state": 2,"interest": 4,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
-                {"id": 9,"userName": "李强","sex": 2,"state": 4,"interest": 6,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
-                {"id": 10,"userName": "谭娜","sex": 2,"state": 3,"interest": 4,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"}
+                // {"id": 1,"userName": "侯静","sex": 2,"state": 3,"interest": 6,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
+                // {"id": 2,"userName": "胡秀兰", "sex": 2,"state": 5, "interest": 8,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
+                // {"id": 3,"userName": "田静","sex": 2,"state": 5,"interest": 4,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
+                // {"id": 4,"userName": "唐娟","sex": 1,"state": 2,"interest": 5,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
+                // {"id": 5,"userName": "梁芳","sex": 2,"state": 2,"interest": 4,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
+                // {"id": 6,"userName": "方磊","sex": 1, "state": 5,"interest": 4,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
+                // {"id": 7,"userName": "卢娜","sex": 1,"state": 1,"interest": 2,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
+                // {"id": 8,"userName": "于超","sex": 1,"state": 2,"interest": 4,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
+                // {"id": 9,"userName": "李强","sex": 2,"state": 4,"interest": 6,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"},
+                // {"id": 10,"userName": "谭娜","sex": 2,"state": 3,"interest": 4,"birthday": "1995-09-03","address": "河南郑州","time": "06:00"}
             ],
             selectedRowKeys:[],
             selectedItem:''
@@ -123,11 +123,13 @@ export default class BasicTable extends Component{
             },
         ];
         data.map((item,index)=>{
-            return item.key = index;
+            item.key = index;
+            return item
         })
         let data1=this.state.dataSource2;
         data1.map((item,index)=>{
-            return item.key = index+1;
+            item.key = index+1;
+            return item
         })
         console.log("data1==",data1)
         this.setState({
@@ -145,16 +147,17 @@ export default class BasicTable extends Component{
                 params:{
                     page:1
                 },
-                isShowLoading:false
+                //isShowLoading:false
             },
             
         }).then((res)=>{
             if(res.code ===0){
-                res.result.map((item,index)=>{
-                   return item.key=index;
+                let list=res.result.list.map((item,index)=>{
+                    item.key=index;
+                    return item
                 })
                 this.setState({
-                    dataSource2:res.result,
+                    dataSource2:list,
                     selectedRowKeys:[],
                     selectedRows:null,
                     pagination: Untils.pagination(res,(current)=>{
