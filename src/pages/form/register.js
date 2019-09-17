@@ -161,7 +161,7 @@ class FormRegister extends Component{
                                     onChange={this.handleChange}
                                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                 >
-                                    {this.state.userImg ? <img src={this.state.userImg}/> : <Icon type="plus"/> } 
+                                    {this.state.userImg ? <img src={this.state.userImg} alt=""/> : <Icon type="plus"/> } 
                                 </Upload>
 							)}
                         </FormItem>

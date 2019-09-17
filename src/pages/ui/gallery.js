@@ -39,7 +39,7 @@ export default class Gallery extends Component{
         ]
         const imgList=imgs.map((list) =>{
             return list.map((item)=>
-                <Card cover={<img src={'/gallery/' + item} onClick={()=>this.openGallery(item)}/>} style={{marginBottom:"10px"}}>
+                <Card cover={<img src={'/gallery/' + item} onClick={()=>this.openGallery(item)} alt=""/>} style={{marginBottom:"10px"}}>
                     <Meta title="React" description="兰木落"/>
                 </Card>
             )
@@ -67,7 +67,7 @@ export default class Gallery extends Component{
                     onCancel={this.handleCancel} onOk={this.handleOk}
                     width={300} height={500}
                 >
-                    {<img src={this.state.currentImg} width="250px" height="360px"/>}
+                    {<img src={this.state.currentImg} alt="" width="250px" height="360px"/>}
                 </Modal>
             </div>
         )

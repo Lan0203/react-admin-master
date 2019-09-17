@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Row , Col , Carousel} from 'antd'
+import { Card,Carousel} from 'antd'
 import './ui.less';
 
 export default class Carousels extends Component{
@@ -17,13 +17,13 @@ export default class Carousels extends Component{
                 <Card title="图片轮播" className="slider-wrap">
                     <Carousel autoplay effect="fade">
                         <div>
-                            <img src="/carousel-img/carousel-1.jpg" width="100%"/>
+                            <img src="/carousel-img/carousel-1.jpg" width="100%" alt=""/>
                         </div>
                         <div>
-                            <img src="/carousel-img/carousel-2.jpg" width="100%"/>
+                            <img src="/carousel-img/carousel-2.jpg" width="100%" alt=""/>
                         </div>
                         <div>
-                            <img src="/carousel-img/carousel-3.jpg" width="100%" />
+                            <img src="/carousel-img/carousel-3.jpg" width="100%" alt=""/>
                         </div>
                     </Carousel>
                 </Card>
