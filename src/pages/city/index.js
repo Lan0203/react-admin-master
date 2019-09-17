@@ -128,6 +128,7 @@ export default class City extends Component{
                     <Table columns={this.columns} 
                         bordered
                         dataSource={this.state.list}
+                        pagination={this.state.pagination}
                     />
                 </div>
                 <Modal visible={this.state.isShowOpenCity}
