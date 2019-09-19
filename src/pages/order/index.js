@@ -5,7 +5,6 @@ import Utils from '../../utils/utils';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const RangePicker=DatePicker.RangePicker
 
 export default class Order extends Component{
 
@@ -13,7 +12,12 @@ export default class Order extends Component{
         super();
         this.state={
             pagination:'',
-            list:[],
+            list:[
+                {id:'1001',order_sn:'1001',bike_sn:"b1001",user_name:'admin',mobile:"12345678909",distance:10,total_time:'1h',status:'已还车',start_time:'2019-09-17 09:00:00',end_time:'2019-09-17 10:00:00',total_fee:'2',user_pay:'1'}
+            ],
+            selectedItem:'',
+            orderInfo:{},
+            orderConfirmVisble:false
         }
         this.params={
             page:1,
@@ -70,7 +74,7 @@ export default class Order extends Component{
     }
     componentDidMount(){
 
-        this.requestList();
+        //this.requestList();
     }
     requestList = () =>{
         let _this=this;
@@ -80,7 +84,7 @@ export default class Order extends Component{
                 params:{
                     page:this.params.page
                 },
-                 isShowLoading:false
+                //isShowLoading:false
             }
         }).then((res)=>{
             let list=res.result.item_list.map((item,index)=>{
@@ -96,23 +100,140 @@ export default class Order extends Component{
             })
         })
     }
+    handleConfirm = ()=>{
+        let item = this.state.selectedItem;
+        if (!item) {
+            Modal.info({
+                title: '信息',
+                content: '请选择一条订单进行结束'
+            })
+            return;
+        }
+        axios.ajax({
+            url:'/order/ebike_info',
+            data:{
+                params:{
+                    orderId: item.id
+                },
+                
+            }
+        }).then((res)=>{
+            if(res.code ===0 ){
+                this.setState({
+                    orderInfo:res.result,
+                    orderConfirmVisble: true
+                })
+            }
+        })
+    }
+    // 结束订单
+    handleFinishOrder = ()=>{
+        let item = this.state.selectedItem;
+        axios.ajax({
+            url: '/order/finish_order',
+            data: {
+                params: {
+                    orderId: item.id
+                }
+            }
+        }).then((res) => {
+            if (res.code === 0) {
+                message.success('订单结束成功')
+                this.setState({
+                    orderConfirmVisble: false
+                })
+                this.requestList();
+            }
+        })
+    }
+    onRowClick = (record, index) => {
+        let selectKey = [index];
+        this.setState({
+            selectedRowKeys: selectKey,
+            selectedItem: record
+        })
+    }
+    handleRowSelectionChange = (selectedRowKeys, selectedRows) =>{
+        let selectKey = selectedRowKeys;
+        this.setState({
+            selectedRowKeys: selectKey,
+            selectedItem: selectedRows[0]
+        })
+    }
+    openOrderDetail = ()=>{
+        let item = this.state.selectedItem;
+        if (!item) {
+            Modal.info({
+                title: '信息',
+                content: '请先选择一条订单'
+            })
+            return;
+        }
+        window.open(`/#/common/order/detail/${item.id}`,'_blank')
+    }
     render(){
+        const formItemLayout = {
+            labelCol:{span:5},
+            wrapperCol:{span:19}
+        }
+        const selectedRowKeys = this.state.selectedRowKeys;
+        const rowSelection = {
+            type: 'radio',
+            selectedRowKeys,
+            onChange:(selectedRowKeys, selectedRows)=>{
+                this.handleRowSelectionChange(selectedRowKeys, selectedRows)
+            }
+        }
         return(
             <div>
                 <Card>
                     <FilterForm />
                 </Card>
                 <Card style={{marginTop:10}}>
-                    <Button>订单详情</Button>
-                    <Button>结束订单</Button>
+                    <Button type="primary" onClick={this.openOrderDetail}>订单详情</Button>
+                    <Button type="primary" style={{marginLeft:10}} onClick={this.handleConfirm}>结束订单</Button>
                 </Card>
                 <div className="content-wrap">
                     <Table columns={this.columns} 
                         bordered
                         dataSource={this.state.list}
                         pagination={this.state.pagination}
+                        rowSelection={rowSelection}
+                        // onRow={(record, index) => {
+                        //     return {
+                        //         onClick: () => {
+                        //             this.onRowClick(record, index);
+                        //         }
+                        //     };
+                        // }}
                     />
                 </div>
+                <Modal
+                    title="结束订单"
+                    visible={this.state.orderConfirmVisble}
+                    onCancel={()=>{
+                        this.setState({
+                            orderConfirmVisble:false
+                        })
+                    }}
+                    onOk={this.handleFinishOrder}
+                    width={600}
+                >
+                    <Form layout="horizontal">
+                        <FormItem label="车辆编号" {...formItemLayout}>
+                            {this.state.orderInfo.bike_sn}
+                        </FormItem>
+                        <FormItem label="剩余电量" {...formItemLayout}>
+                            {this.state.orderInfo.battery + '%'}
+                        </FormItem>
+                        <FormItem label="行程开始时间" {...formItemLayout}>
+                            {this.state.orderInfo.start_time}
+                        </FormItem>
+                        <FormItem label="当前位置" {...formItemLayout}>
+                            {this.state.orderInfo.location}
+                        </FormItem>
+                    </Form>
+                </Modal>
             </div>
         )
     }

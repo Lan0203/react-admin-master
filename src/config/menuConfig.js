@@ -87,7 +87,7 @@ const menuList = [
         title: '订单管理',
         key: '/order',
         icon:'unordered-list',
-        children: [
+        btnList: [
             {
                 title: '订单详情',
                 key: 'detail'
