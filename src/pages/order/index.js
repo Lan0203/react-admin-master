@@ -74,7 +74,7 @@ export default class Order extends Component{
     }
     componentDidMount(){
 
-        //this.requestList();
+        this.requestList();
     }
     requestList = () =>{
         let _this=this;
