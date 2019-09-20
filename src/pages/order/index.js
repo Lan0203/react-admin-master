@@ -112,7 +112,8 @@ export default class Order extends Component{
     }
     requestList = () =>{
         let _this=this;
-        axios.ajax({
+        axios.requestList(this,'/order/list',this.params,true)
+        /*axios.ajax({
             url:'/order/list',
             data:{
                 params:{
@@ -132,7 +133,7 @@ export default class Order extends Component{
                     _this.requestList();
                 })
             })
-        })
+        })*/
     }
     handleConfirm = ()=>{
         let item = this.state.selectedItem;
