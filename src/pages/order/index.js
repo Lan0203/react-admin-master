@@ -110,10 +110,14 @@ export default class Order extends Component{
 
         this.requestList();
     }
+    handleFilter = (params)=>{
+        this.params = params;
+        this.requestList();
+    }
     requestList = () =>{
         let _this=this;
-        axios.requestList(this,'/order/list',this.params,true)
-        /*axios.ajax({
+        //axios.requestList(this,'/order/list',this.params,true)
+        axios.ajax({
             url:'/order/list',
             data:{
                 params:{
@@ -133,7 +137,7 @@ export default class Order extends Component{
                     _this.requestList();
                 })
             })
-        })*/
+        })
     }
     handleConfirm = ()=>{
         let item = this.state.selectedItem;
@@ -206,10 +210,7 @@ export default class Order extends Component{
         }
         window.open(`/#/common/order/detail/${item.id}`,'_blank')
     }
-    handleFilter = (params)=>{
-        this.params = params;
-        this.requestList();
-    }
+    
     render(){
         const formItemLayout = {
             labelCol:{span:5},

@@ -61,6 +61,16 @@ class FilterForm extends Component{
                     </FormItem>;
                     formItemList.push(CHECKBOX)
                 }
+                else if(item.type === "DATE"){
+                    const DATE=<FormItem label={label} key={field}>
+                        {
+                            getFieldDecorator([field])(
+                                <DatePicker showTime={true} placeholder={placeholder} format="YYYY-MM-DD HH:mm:ss"/>
+                            )
+                        }
+                    </FormItem>;
+                    formItemList.push(DATE)
+                }
                 else if (item.type == '时间查询'){
                     const begin_time = <FormItem label="订单时间" key={field}>
                         {
