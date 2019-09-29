@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
-import {Input,Button,Select,Form,Checkbox,Radio,DatePicker} from 'antd';
+import {Input,Button,Select,Form,Checkbox,DatePicker} from 'antd';
 import Utils from '../../utils/utils';
 const FormItem =Form.Item;
-const Option=Select.Option;
+
 
 class FilterForm extends Component{
 
@@ -71,7 +71,7 @@ class FilterForm extends Component{
                     </FormItem>;
                     formItemList.push(DATE)
                 }
-                else if (item.type == '时间查询'){
+                else if (item.type === '时间查询'){
                     const begin_time = <FormItem label="订单时间" key={field}>
                         {
                             getFieldDecorator('begin_time')(
@@ -88,6 +88,23 @@ class FilterForm extends Component{
                         }
                     </FormItem>;
                     formItemList.push(end_time)
+                }
+                else if(item.type === "城市"){
+                    const CITY=<FormItem label={label} key={field}>
+                        {
+                            getFieldDecorator([field],{
+                                initialValue:initValue
+                            })(
+                                <Select
+                                    style={{width:width}}
+                                    placeholder={placeholder}
+                                >
+                                   {Utils.getOptionList(item.list)}
+                                </Select>
+                            )
+                        }
+                    </FormItem>;
+                    formItemList.push(CITY)
                 }
             })
         }

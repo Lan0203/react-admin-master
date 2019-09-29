@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Table, Modal, Button, message, Badge } from 'antd';
 import axios from '../../axios/index'
-import Utils from '../../utils/utils';
 export default class HighTable extends React.Component {
 
     state = {
@@ -16,7 +15,6 @@ export default class HighTable extends React.Component {
 
     // 动态获取mock数据
     request = () => {
-        let _this = this;
         axios.ajax({
             url: '/table/high/list',
             data: {

@@ -106,7 +106,7 @@ export default class City extends Component{
                 params:cityInfo
             }
         }).then((res)=>{
-            if(res.code == '0'){
+            if(res.code === '0'){
                 message.success('开通成功');
                 this.setState({
                     isShowOpenCity:false

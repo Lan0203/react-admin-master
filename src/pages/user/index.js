@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button, Table, Form, Input, Checkbox,Select,Radio, Icon, message, Modal, DatePicker } from 'antd'
+import { Card, Button,  Form, Input, Select,Radio,  message, Modal, DatePicker } from 'antd'
 import axios from '../../axios/index'
 import Utils from '../../utils/utils'
 import ETable from '../../components/ETable/index'
@@ -21,7 +21,7 @@ export default class User extends React.Component{
             title: '性别',
             dataIndex: 'sex',
             render(sex){
-                return sex ==1 ?'男':'女'
+                return sex ===1 ?'男':'女'
             }
           }, {
             title: '状态',
@@ -108,13 +108,13 @@ export default class User extends React.Component{
     // 操作员工
     handleOperator = (type)=>{
         let item = this.state.selectedItem;
-        if(type =='create'){
+        if(type ==='create'){
             this.setState({
                 title:'创建员工',
                 isVisible:true,
                 type
             })
-        }else if(type=="edit" || type=='detail'){
+        }else if(type==="edit" || type==='detail'){
             if(!item){
                 Modal.info({
                     title: '信息',
@@ -123,12 +123,12 @@ export default class User extends React.Component{
                 return;
             }
             this.setState({
-                title:type=='edit'?'编辑用户':'查看详情',
+                title:type==='edit'?'编辑用户':'查看详情',
                 isVisible:true,
                 userInfo:item,
                 type
             })
-        }else if(type=="delete"){
+        }else if(type==="delete"){
             if(!item){
                 Modal.info({
                     title: '信息',
@@ -148,7 +148,7 @@ export default class User extends React.Component{
                             }
                         }
                     }).then((res)=>{
-                        if(res.code ==0){
+                        if(res.code ===0){
                             this.setState({
                                 isVisible:false
                             })
@@ -165,14 +165,14 @@ export default class User extends React.Component{
         let type = this.state.type;
         let data = this.userForm.props.form.getFieldsValue();
         axios.ajax({
-            url:type == 'create'?'/user/add':'/user/edit',
+            url:type === 'create'?'/user/add':'/user/edit',
             data:{
                 params:{
                     ...data
                 }
             }
         }).then((res)=>{
-            if(res.code ==0){
+            if(res.code ===0){
                 this.setState({
                     isVisible:false
                 })
@@ -257,7 +257,7 @@ class UserForm extends React.Component{
             <Form layout="horizontal">
                 <FormItem label="姓名" {...formItemLayout}>
                     {
-                        userInfo && type=='detail'?userInfo.username:
+                        userInfo && type ==='detail'?userInfo.username:
                         getFieldDecorator('user_name',{
                             initialValue:userInfo.username
                         })(
@@ -267,7 +267,7 @@ class UserForm extends React.Component{
                 </FormItem>
                 <FormItem label="性别" {...formItemLayout}>
                     {
-                        userInfo && type=='detail'?userInfo.sex==1?'男':'女':
+                        userInfo && type ==='detail'?userInfo.sex===1?'男':'女':
                         getFieldDecorator('sex',{
                             initialValue:userInfo.sex
                         })(
@@ -279,7 +279,7 @@ class UserForm extends React.Component{
                 </FormItem>
                 <FormItem label="状态" {...formItemLayout}>
                     {
-                        userInfo && type=='detail'?this.getState(userInfo.state):
+                        userInfo && type ==='detail'?this.getState(userInfo.state):
                         getFieldDecorator('state',{
                             initialValue:userInfo.state
                         })(
@@ -294,7 +294,7 @@ class UserForm extends React.Component{
                 </FormItem>
                 <FormItem label="生日" {...formItemLayout}>
                     {
-                        userInfo && type=='detail'?userInfo.birthday:
+                        userInfo && type ==='detail'?userInfo.birthday:
                         getFieldDecorator('birthday',{
                             initialValue:Moment(userInfo.birthday)
                         })(
@@ -303,7 +303,7 @@ class UserForm extends React.Component{
                 </FormItem>
                 <FormItem label="联系地址" {...formItemLayout}>
                     {
-                        userInfo && type=='detail'?userInfo.address:
+                        userInfo && type ==='detail'?userInfo.address:
                         getFieldDecorator('address',{
                             initialValue:userInfo.address
                         })(
