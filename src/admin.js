@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
 import { Row , Col } from 'antd';
-import './style/common.less'
+import './style/common.less';
 import Header from './components/Header/index.js';
 import Footer from './components/Footer/index.js';
 import NavLeft from './components/NavLeft/index.js';
 
-export default class Admin extends Component{
+class Admin extends Component{
 
     render(){
         return(
@@ -24,3 +24,4 @@ export default class Admin extends Component{
         )
     }
 }
+export default Admin
